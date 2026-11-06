@@ -1,0 +1,110 @@
+---
+import { restaurant } from "../data/restaurant";
+import Gabbiano from "./Gabbiano.astro";
+
+const liens = [
+  { href: "#cuisine", label: "Notre cuisine" },
+  { href: "#maison", label: "La maison" },
+  { href: "#avis", label: "Avis" },
+  { href: "#infos", label: "Infos pratiques" },
+];
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-inchiostro-900/10 bg-crema-50/95 backdrop-blur-sm"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+    <a href="#top" class="flex items-center gap-2 font-serif text-xl font-bold text-pomodoro-600">
+      <Gabbiano class="h-5 w-8 text-pomodoro-600" />
+      <span>{restaurant.nom}</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Navigation principale">
+      {
+        liens.map((lien) => (
+          <a
+            href={lien.href}
+            class="text-sm font-medium text-inchiostro-800 transition-colors hover:text-pomodoro-600"
+          >
+            {lien.label}
+          </a>
+        ))
+      }
+      <a
+        href={`tel:${restaurant.telephone.lien}`}
+        class="rounded-full bg-pomodoro-600 px-4 py-2 text-sm font-semibold text-crema-50 shadow-sm transition-colors hover:bg-pomodoro-700"
+      >
+        Appeler
+      </a>
+    </nav>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="flex items-center justify-center rounded-md p-2 text-inchiostro-900 md:hidden"
+      aria-expanded="false"
+      aria-controls="menu-mobile"
+      aria-label="Ouvrir le menu de navigation"
+    >
+      <svg id="icone-ouvrir" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg id="icone-fermer" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    id="menu-mobile"
+    class="hidden flex-col gap-1 border-t border-inchiostro-900/10 bg-crema-50 px-4 py-3 md:hidden"
+    aria-label="Navigation mobile"
+  >
+    {
+      liens.map((lien) => (
+        <a
+          href={lien.href}
+          class="rounded-md px-3 py-3 text-base font-medium text-inchiostro-800 hover:bg-crema-100"
+        >
+          {lien.label}
+        </a>
+      ))
+    }
+    <a
+      href={`tel:${restaurant.telephone.lien}`}
+      class="mt-2 rounded-full bg-pomodoro-600 px-4 py-3 text-center text-base font-semibold text-crema-50"
+    >
+      Appeler le restaurant
+    </a>
+  </nav>
+</header>
+
+<script>
+  const bouton = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu-mobile");
+  const iconeOuvrir = document.getElementById("icone-ouvrir");
+  const iconeFermer = document.getElementById("icone-fermer");
+
+  function fermerMenu() {
+    menu?.classList.add("hidden");
+    bouton?.setAttribute("aria-expanded", "false");
+    iconeOuvrir?.classList.remove("hidden");
+    iconeFermer?.classList.add("hidden");
+  }
+
+  bouton?.addEventListener("click", () => {
+    const estOuvert = bouton.getAttribute("aria-expanded") === "true";
+    if (estOuvert) {
+      fermerMenu();
+    } else {
+      menu?.classList.remove("hidden");
+      bouton.setAttribute("aria-expanded", "true");
+      iconeOuvrir?.classList.add("hidden");
+      iconeFermer?.classList.remove("hidden");
+    }
+  });
+
+  menu?.querySelectorAll("a").forEach((lien) => {
+    lien.addEventListener("click", fermerMenu);
+  });
+</script>

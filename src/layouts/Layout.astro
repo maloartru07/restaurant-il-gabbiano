@@ -1,0 +1,118 @@
+---
+import { restaurant, horaires, horairesConfirmes } from "../data/restaurant";
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const joursJsonLd: Record<string, string> = {
+  Lundi: "Monday",
+  Mardi: "Tuesday",
+  Mercredi: "Wednesday",
+  Jeudi: "Thursday",
+  Vendredi: "Friday",
+  Samedi: "Saturday",
+  Dimanche: "Sunday",
+};
+
+const openingHoursSpecification = horairesConfirmes
+  ? horaires
+      .filter((j) => j.creneaux && j.creneaux.length > 0)
+      .flatMap((j) =>
+        (j.creneaux ?? []).map((c) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: joursJsonLd[j.jour],
+          opens: c.ouverture,
+          closes: c.fermeture,
+        }))
+      )
+  : undefined;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: restaurant.nom,
+  servesCuisine: "Italienne",
+  priceRange: "€",
+  telephone: `+${restaurant.telephone.lien.replace("+", "")}`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: restaurant.adresse.rue,
+    postalCode: restaurant.adresse.codePostal,
+    addressLocality: restaurant.adresse.ville,
+    addressCountry: "FR",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: restaurant.tripadvisor.note,
+    bestRating: restaurant.tripadvisor.noteMax,
+    reviewCount: restaurant.tripadvisor.nombreAvis,
+  },
+  ...(openingHoursSpecification ? { openingHoursSpecification } : {}),
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="restaurant.restaurant" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-crema-50 text-inchiostro-900 font-sans antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  :focus-visible {
+    outline: 3px solid #c0392b;
+    outline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+// Emplacement photo. Si `src` est fourni et que le fichier existe dans
+// public/photos/, l'image est affichée. Sinon, un fond texturé élégant
+// (dégradé crème/basilic/tomate) sert de remplacement temporaire — jamais
+// une fausse photo de plat.
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
+export interface Props {
+  src?: string;
+  alt: string;
+  class?: string;
+  teinte?: "pomodoro" | "basilico" | "inchiostro";
+}
+
+const { src, alt, class: className = "", teinte = "pomodoro" } = Astro.props;
+
+let fichierExiste = false;
+if (src) {
+  const chemin = fileURLToPath(new URL(`../../public${src}`, import.meta.url));
+  fichierExiste = existsSync(chemin);
+}
+
+const degrades: Record<string, string> = {
+  pomodoro: "from-pomodoro-600 via-pomodoro-700 to-inchiostro-900",
+  basilico: "from-basilico-600 via-basilico-700 to-inchiostro-900",
+  inchiostro: "from-inchiostro-800 via-inchiostro-900 to-pomodoro-700",
+};
+---
+
+{
+  fichierExiste && src ? (
+    <img src={src} alt={alt} class={className} loading="lazy" />
+  ) : (
+    <div
+      class:list={[
+        "relative overflow-hidden bg-gradient-to-br",
+        degrades[teinte],
+        className,
+      ]}
+      role="img"
+      aria-label={alt}
+    >
+      <div
+        class="absolute inset-0 opacity-20"
+        style="background-image: radial-gradient(circle at 20% 20%, white 0, transparent 35%), radial-gradient(circle at 80% 70%, white 0, transparent 30%);"
+      >
+      </div>
+    </div>
+  )
+}

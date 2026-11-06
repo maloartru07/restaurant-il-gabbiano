@@ -1,0 +1,79 @@
+---
+import { restaurant } from "../data/restaurant";
+import PhotoSlot from "./PhotoSlot.astro";
+
+const familles = [
+  {
+    nom: "Pizzas",
+    description:
+      "Pâte travaillée avec soin, bons produits et sauce tomate maison : la pizza est l'un des grands classiques de la maison.",
+    photo: "/photos/pizza.jpg",
+    teinte: "pomodoro" as const,
+  },
+  {
+    nom: "Pâtes",
+    description:
+      "Des recettes traditionnelles, dont le fameux « trio » de pâtes qui revient souvent dans les avis des habitués.",
+    photo: "/photos/pates.jpg",
+    teinte: "basilico" as const,
+  },
+  {
+    nom: "Salades",
+    description:
+      "La paysanne et la campagnarde sont particulièrement appréciées, fraîches et généreuses.",
+    photo: "/photos/salade.jpg",
+    teinte: "basilico" as const,
+  },
+  {
+    nom: "Desserts maison",
+    description:
+      "Tiramisu et desserts traditionnels faits maison, pour finir le repas en douceur.",
+    photo: "/photos/tiramisu.jpg",
+    teinte: "inchiostro" as const,
+  },
+];
+---
+
+<section id="cuisine" class="bg-crema-50 py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-pomodoro-600">
+        Notre cuisine
+      </p>
+      <h2 class="mt-3 font-serif text-3xl font-bold text-inchiostro-900 sm:text-4xl">
+        Une cuisine italienne simple et généreuse
+      </h2>
+      <p class="mt-4 text-lg text-inchiostro-800/80">
+        La carte change selon le marché et les saisons : appelez-nous au{" "}
+        <a
+          href={`tel:${restaurant.telephone.lien}`}
+          class="font-semibold text-pomodoro-600 underline-offset-2 hover:underline"
+        >
+          {restaurant.telephone.affichage}
+        </a>{" "}
+        pour connaître les suggestions du jour.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-8 sm:grid-cols-2">
+      {
+        familles.map((famille) => (
+          <article class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-inchiostro-900/5">
+            <PhotoSlot
+              src={famille.photo}
+              alt={`Photo illustrant les ${famille.nom.toLowerCase()} d'Il Gabbiano`}
+              teinte={famille.teinte}
+              class="h-48 w-full"
+            />
+            <div class="p-6">
+              <h3 class="font-serif text-xl font-bold text-inchiostro-900">
+                {famille.nom}
+              </h3>
+              <p class="mt-2 text-inchiostro-800/80">{famille.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

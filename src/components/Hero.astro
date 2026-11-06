@@ -1,0 +1,73 @@
+---
+import { restaurant } from "../data/restaurant";
+import { statutDuJour } from "../utils/horaires";
+import Gabbiano from "./Gabbiano.astro";
+import PhotoSlot from "./PhotoSlot.astro";
+
+const statut = statutDuJour();
+const adresseComplete = `${restaurant.adresse.rue}, ${restaurant.adresse.codePostal} ${restaurant.adresse.ville}`;
+---
+
+<section id="top" class="relative overflow-hidden pt-28 sm:pt-32">
+  <PhotoSlot
+    alt="Façade chaleureuse d'une trattoria italienne"
+    teinte="inchiostro"
+    class="absolute inset-0 -z-10"
+  />
+  <div class="absolute inset-0 -z-10 bg-inchiostro-900/55"></div>
+
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="max-w-2xl text-crema-50">
+      <Gabbiano class="mb-6 h-6 w-10 text-crema-200" />
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-crema-200">
+        {restaurant.cuisine} · Issy-les-Moulineaux
+      </p>
+      <h1 class="mt-4 font-serif text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">
+        {restaurant.nom}
+      </h1>
+      <p class="mt-4 text-lg text-crema-100 sm:text-xl">
+        {restaurant.accroche} — cuisine italienne généreuse, pizzas et pâtes
+        maison, petite terrasse tranquille.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`tel:${restaurant.telephone.lien}`}
+          class="rounded-full bg-pomodoro-600 px-6 py-3 text-base font-semibold text-crema-50 shadow-lg transition-colors hover:bg-pomodoro-700"
+        >
+          📞 Appeler pour réserver
+        </a>
+        <a
+          href={restaurant.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full border-2 border-crema-100 px-6 py-3 text-base font-semibold text-crema-50 transition-colors hover:bg-crema-50 hover:text-inchiostro-900"
+        >
+          🗺️ Itinéraire
+        </a>
+      </div>
+
+      <div class="mt-8 flex flex-col gap-2 text-sm text-crema-100 sm:flex-row sm:items-center sm:gap-4">
+        <span>{adresseComplete}</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
+        <span
+          class:list={[
+            "inline-flex items-center gap-2 font-medium",
+            statut.ouvert === true && "text-basilico-500",
+            statut.ouvert === false && "text-crema-200",
+            statut.ouvert === null && "text-crema-200",
+          ]}
+        >
+          <span
+            class:list={[
+              "h-2 w-2 rounded-full",
+              statut.ouvert === true ? "bg-basilico-500" : "bg-crema-200",
+            ]}
+            aria-hidden="true"
+          ></span>
+          {statut.texte}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

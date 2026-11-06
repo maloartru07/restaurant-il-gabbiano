@@ -1,0 +1,34 @@
+---
+import { restaurant } from "../data/restaurant";
+import Gabbiano from "./Gabbiano.astro";
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="bg-crema-100 py-10">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 text-center sm:px-6">
+    <Gabbiano class="h-4 w-7 text-pomodoro-600" />
+
+    {
+      restaurant.instagramUrl && (
+        <a
+          href={restaurant.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm font-semibold text-inchiostro-800 hover:text-pomodoro-600"
+        >
+          Suivre sur Instagram
+        </a>
+      )
+    }
+
+    <p class="text-sm text-inchiostro-800/70">
+      {restaurant.nom} · {restaurant.adresse.rue}, {restaurant.adresse.codePostal}{" "}
+      {restaurant.adresse.ville}
+    </p>
+
+    <p class="text-xs font-semibold uppercase tracking-wide text-inchiostro-800/50">
+      Maquette de démonstration — © {annee}
+    </p>
+  </div>
+</footer>

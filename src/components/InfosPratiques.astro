@@ -1,0 +1,94 @@
+---
+import { restaurant, horaires, horairesConfirmes, services } from "../data/restaurant";
+
+const adresseComplete = `${restaurant.adresse.rue}, ${restaurant.adresse.codePostal} ${restaurant.adresse.ville}`;
+---
+
+<section id="infos" class="bg-inchiostro-900 py-20 text-crema-50 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-crema-200">
+      Infos pratiques
+    </p>
+    <h2 class="mt-3 font-serif text-3xl font-bold sm:text-4xl">
+      Venir chez {restaurant.nom}
+    </h2>
+
+    <div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <h3 class="font-serif text-lg font-bold text-crema-100">Adresse</h3>
+        <p class="mt-2 text-crema-200">{adresseComplete}</p>
+        <a
+          href={restaurant.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-pomodoro-500 hover:underline"
+        >
+          Voir l'itinéraire →
+        </a>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-lg font-bold text-crema-100">Téléphone</h3>
+        <a
+          href={`tel:${restaurant.telephone.lien}`}
+          class="mt-2 inline-block text-xl font-semibold text-crema-50 hover:text-pomodoro-500"
+        >
+          {restaurant.telephone.affichage}
+        </a>
+        <p class="mt-2 text-sm text-crema-200">
+          Réservation uniquement par téléphone.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-lg font-bold text-crema-100">Services</h3>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          {
+            services.map((service) => (
+              <li class="rounded-full bg-crema-50/10 px-3 py-1 text-sm text-crema-100">
+                {service}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 max-w-md">
+      <h3 class="font-serif text-lg font-bold text-crema-100">Horaires</h3>
+      {
+        horairesConfirmes ? (
+          <table class="mt-3 w-full text-sm text-crema-200">
+            <tbody>
+              {horaires.map((jour) => (
+                <tr class="border-b border-crema-50/10">
+                  <th scope="row" class="py-2 text-left font-medium text-crema-100">
+                    {jour.jour}
+                  </th>
+                  <td class="py-2 text-right">
+                    {jour.creneaux && jour.creneaux.length > 0
+                      ? jour.creneaux
+                          .map((c) => `${c.ouverture}–${c.fermeture}`)
+                          .join(" · ")
+                      : "Fermé"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p class="mt-3 rounded-xl bg-crema-50/10 p-4 text-sm text-crema-200">
+            Horaires en cours de confirmation auprès du restaurant.{" "}
+            <a
+              href={`tel:${restaurant.telephone.lien}`}
+              class="font-semibold text-pomodoro-500 hover:underline"
+            >
+              Appelez-nous
+            </a>{" "}
+            pour connaître les horaires exacts du jour.
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
