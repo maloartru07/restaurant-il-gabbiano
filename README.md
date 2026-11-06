@@ -75,17 +75,19 @@ masqué.
 
 ### Photos
 
-Déposez vos images dans **`public/photos/`** avec ces noms de fichiers :
+Les photos se trouvent dans **`public/photos/`**, avec ces noms de fichiers :
 
 - `pizza.jpg`
 - `pates.jpg`
 - `salade.jpg`
 - `tiramisu.jpg`
+- `maison.jpg` (photo d'ambiance, section « La maison »)
 
-Dès qu'un fichier existe, il remplace automatiquement le fond de couleur
-générique utilisé en attendant (voir `src/components/PhotoSlot.astro`).
-Formats recommandés : `.jpg` ou `.webp`, environ 1600×1200 px, moins de
-400 Ko pour rester rapide.
+Pour remplacer une photo, déposez simplement un nouveau fichier avec le même
+nom : il écrase automatiquement l'ancien. S'il manque un fichier, le site
+affiche un fond de couleur générique à la place (voir
+`src/components/PhotoSlot.astro`). Formats recommandés : `.jpg` ou `.webp`,
+environ 1600×1200 px, moins de 400 Ko pour rester rapide.
 
 ## Déployer
 

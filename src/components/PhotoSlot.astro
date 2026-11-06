@@ -30,7 +30,12 @@ const degrades: Record<string, string> = {
 
 {
   fichierExiste && src ? (
-    <img src={src} alt={alt} class={className} loading="lazy" />
+    <img
+      src={src}
+      alt={alt}
+      class:list={["object-cover object-center", className]}
+      loading="lazy"
+    />
   ) : (
     <div
       class:list={[
