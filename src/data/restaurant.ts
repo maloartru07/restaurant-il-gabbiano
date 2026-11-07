@@ -194,7 +194,7 @@ export const carte: CategorieCarte[] = [
   },
   {
     titre: "Entrées",
-    plats: ["Escargots farcis"],
+    plats: ["Escargots farcis", "Moules farcies"],
   },
   {
     titre: "Charcuteries",
@@ -203,5 +203,44 @@ export const carte: CategorieCarte[] = [
   {
     titre: "Poissons",
     plats: ["Gambas grillées", "Gambas provençale", "Gambas Il Gabbiano"],
+  },
+  {
+    titre: "Viandes",
+    plats: [
+      "Escalope milanaise",
+      "Escalope à la crème",
+      "Escalope au citron",
+      "Escalope gorgonzola",
+      "Escalope marsala",
+      "Escalope bolognaise gratinée au four",
+      "Escalope saltimbocca",
+      "Escalope fiorentina",
+    ],
+  },
+  {
+    titre: "Pizzas",
+    plats: [
+      "Margherita",
+      "Napolitaine",
+      "Reine",
+      "Capri",
+      "Campione",
+      "Orientale",
+      "Paysanne",
+      "Quatre fromages",
+      "Quatre saisons",
+      "Parma",
+      "Norvégienne",
+      "Végétarienne",
+      "Il Gabbiano",
+    ],
+  },
+  {
+    titre: "Nos fromages",
+    plats: ["Chèvre", "Mozzarella", "Gorgonzola", "Assiette de fromages"],
+  },
+  {
+    titre: "Apéritifs",
+    plats: ["Ricard", "Pastis", "Americano"],
   },
 ];
