@@ -24,6 +24,11 @@ export const restaurant = {
     nombreAvis: 49,
     classement: "n°50 sur 221 restaurants à Issy-les-Moulineaux",
   },
+  google: {
+    note: 4.5,
+    noteMax: 5,
+    nombreAvis: 277,
+  },
   // Laissez vide ("") ou retirez l'URL pour masquer le bouton Instagram.
   instagramUrl: "",
 };
@@ -94,6 +99,47 @@ export const avis: Avis[] = [
       "Les pizzas sont parfaites. La pâte à pizza est parfaite et les pizzas sont excellentes et bien garnies.",
     auteur: "Ben",
     date: "septembre 2020",
+  },
+];
+
+// Avis réels publiés sur Google. Sélection des avis les plus récents et les
+// mieux notés parmi ceux fournis par le restaurant (277 avis au total,
+// moyenne 4,5/5 sur Google). Ne pas en inventer d'autres.
+export const avisGoogle: Avis[] = [
+  {
+    texte: "Très bonne pizza et une équipe très agréable.",
+    auteur: "David Billot",
+    date: "juin 2026",
+  },
+  {
+    texte:
+      "Meilleure pizza italienne de la région parisienne. Le chef est très gentil et la dame à l'accueil très accueillante. Ambiance conviviale et chaleureuse. Je recommande fortement !",
+    auteur: "Yh Hv",
+    date: "mai 2026",
+  },
+  {
+    texte:
+      "J'ai mangé une tagliatelle quatre fromages extraordinaire, les pizzas et la gentillesse de la serveuse inégalée, un patron tout souriant et toujours là pour vous rendre service […]",
+    auteur: "Panos Fytrakis",
+    date: "avril 2026",
+  },
+  {
+    texte:
+      "Top, le chef est vraiment gentil, un plaisir d'avoir pu discuter avec lui et les plats sont délicieux.",
+    auteur: "Julien Jacquemet",
+    date: "mars 2026",
+  },
+  {
+    texte:
+      "Un restaurant de quartier magnifique. Nous avons très bien mangé et le personnel était vraiment adorable.",
+    auteur: "peg peg",
+    date: "janvier 2026",
+  },
+  {
+    texte:
+      "Une ambiance chaleureuse, de vrais italiens à la cuisine, des gens souriants et disponibles ! Un vrai italien comme on les aime ! C'est le meilleur resto italien du coin que ce soit pour les pizzas ou pour les pâtes […]",
+    auteur: "Charles Boone",
+    date: "janvier 2026",
   },
 ];
 
