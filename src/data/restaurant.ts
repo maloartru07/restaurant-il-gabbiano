@@ -150,3 +150,58 @@ export const services = [
   "Plats à emporter",
   "Terrasse",
 ];
+
+// Carte transcrite depuis les photos de la carte papier du restaurant.
+// Pas de prix à l'affichage, sauf la formule du midi (son prix est sa
+// caractéristique même). Ne pas ajouter de plats qui ne figurent pas sur
+// les photos fournies.
+
+export type Formule = {
+  nom: string;
+  prix: string;
+  categories: { titre: string; plats: string[] }[];
+};
+
+export const formuleMidi: Formule = {
+  nom: "Formule du midi",
+  prix: "18,00 €",
+  categories: [
+    { titre: "Entrée", plats: ["Œuf mayonnaise", "Salade mixte", "Pâté de campagne"] },
+    {
+      titre: "Plat",
+      plats: ["Viandes du jour", "Tagliatelles boscaiola", "Penne gratiné au four"],
+    },
+    { titre: "Dessert", plats: ["Dessert du jour", "Salade de fruits"] },
+  ],
+};
+
+export type CategorieCarte = { titre: string; plats: string[] };
+
+export const carte: CategorieCarte[] = [
+  {
+    titre: "Hors-d'œuvre & salades",
+    plats: [
+      "Chèvre chaud sur salade",
+      "Salade rafraîchissante",
+      "Salade caprese",
+      "Salade campagnarde",
+      "Salade Il Gabbiano",
+      "Salade norvégienne",
+      "Avocat vinaigrette",
+      "Avocat aux crevettes",
+      "Salade César",
+    ],
+  },
+  {
+    titre: "Entrées",
+    plats: ["Escargots farcis"],
+  },
+  {
+    titre: "Charcuteries",
+    plats: ["Jambon de Parme", "Carpaccio de bœuf"],
+  },
+  {
+    titre: "Poissons",
+    plats: ["Gambas grillées", "Gambas provençale", "Gambas Il Gabbiano"],
+  },
+];

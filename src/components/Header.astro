@@ -3,10 +3,11 @@ import { restaurant } from "../data/restaurant";
 import Gabbiano from "./Gabbiano.astro";
 
 const liens = [
-  { href: "#cuisine", label: "Notre cuisine" },
-  { href: "#maison", label: "La maison" },
-  { href: "#avis", label: "Avis" },
-  { href: "#infos", label: "Infos pratiques" },
+  { href: "/#cuisine", label: "Notre cuisine" },
+  { href: "/menu", label: "Menu" },
+  { href: "/#maison", label: "La maison" },
+  { href: "/#avis", label: "Avis" },
+  { href: "/#infos", label: "Infos pratiques" },
 ];
 ---
 
@@ -14,7 +15,7 @@ const liens = [
   class="fixed inset-x-0 top-0 z-50 border-b border-inchiostro-900/10 bg-crema-50/95 backdrop-blur-sm"
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-    <a href="#top" class="flex items-center gap-2 font-serif text-xl font-bold text-pomodoro-600">
+    <a href="/" class="flex items-center gap-2 font-serif text-xl font-bold text-pomodoro-600">
       <Gabbiano class="h-5 w-8 text-pomodoro-600" />
       <span>{restaurant.nom}</span>
     </a>

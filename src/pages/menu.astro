@@ -1,0 +1,105 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Gabbiano from "../components/Gabbiano.astro";
+import { restaurant, formuleMidi, carte } from "../data/restaurant";
+---
+
+<Layout
+  title="Menu — Il Gabbiano, restaurant italien à Issy-les-Moulineaux"
+  description="La carte d'Il Gabbiano à Issy-les-Moulineaux : formule du midi à 18 €, salades, charcuteries, poissons, pizzas et pâtes maison. Appelez-nous pour les suggestions du jour."
+>
+  <Header />
+  <main class="pt-20 sm:pt-24">
+    <section class="bg-crema-100 py-14 sm:py-20">
+      <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <Gabbiano class="mx-auto mb-4 h-6 w-10 text-pomodoro-600" />
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-pomodoro-600">
+          La carte
+        </p>
+        <h1 class="mt-3 font-serif text-4xl font-bold text-inchiostro-900 sm:text-5xl">
+          Notre menu
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-inchiostro-800/80">
+          La carte évolue selon le marché et les saisons : voici nos
+          incontournables. Pour le détail du jour (pizzas, pâtes, viandes et
+          desserts), appelez-nous au{" "}
+          <a
+            href={`tel:${restaurant.telephone.lien}`}
+            class="font-semibold text-pomodoro-600 underline-offset-2 hover:underline"
+          >
+            {restaurant.telephone.affichage}
+          </a>{" "}
+          — c'est le plus sûr.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-inchiostro-900 py-14 text-crema-50 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <div class="flex flex-wrap items-center justify-center gap-4 text-center">
+          <span
+            class="inline-flex items-center justify-center rounded-full bg-basilico-500 px-5 py-2 font-serif text-lg font-bold text-crema-50 shadow-lg"
+          >
+            {formuleMidi.prix}
+          </span>
+          <h2 class="font-serif text-2xl font-bold sm:text-3xl">
+            {formuleMidi.nom}
+          </h2>
+        </div>
+        <p class="mt-2 text-center text-sm text-crema-200">
+          Entrée + plat + dessert au choix
+        </p>
+
+        <div class="mt-10 grid gap-8 sm:grid-cols-3">
+          {
+            formuleMidi.categories.map((categorie) => (
+              <div class="text-center">
+                <h3 class="font-serif text-lg font-bold text-crema-100">
+                  {categorie.titre}
+                </h3>
+                <ul class="mt-3 space-y-1 text-crema-200">
+                  {categorie.plats.map((plat) => (
+                    <li>{plat}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-crema-50 py-16 sm:py-24">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <h2 class="text-center font-serif text-2xl font-bold text-inchiostro-900 sm:text-3xl">
+          À la carte
+        </h2>
+
+        <div class="mt-10 grid gap-10 sm:grid-cols-2">
+          {
+            carte.map((categorie) => (
+              <div>
+                <h3 class="font-serif text-lg font-bold text-pomodoro-600">
+                  {categorie.titre}
+                </h3>
+                <ul class="mt-3 space-y-2 text-inchiostro-800/80">
+                  {categorie.plats.map((plat) => (
+                    <li class="border-b border-inchiostro-900/10 pb-2">{plat}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="mt-12 text-center text-inchiostro-800/70">
+          Également à la carte : pizzas, pâtes maison, viandes et desserts du
+          jour. Appelez-nous pour connaître les suggestions du moment.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
