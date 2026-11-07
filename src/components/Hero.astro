@@ -8,24 +8,33 @@ const statut = statutDuJour();
 const adresseComplete = `${restaurant.adresse.rue}, ${restaurant.adresse.codePostal} ${restaurant.adresse.ville}`;
 ---
 
-<section id="top" class="relative overflow-hidden pt-28 sm:pt-32">
-  <PhotoSlot
-    alt="Façade chaleureuse d'une trattoria italienne"
-    teinte="inchiostro"
-    class="absolute inset-0 -z-10"
-  />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-inchiostro-900/80 via-inchiostro-900/35 to-inchiostro-900/10"></div>
+<section id="top" class="relative overflow-hidden bg-inchiostro-900">
+  <div class="relative h-[360px] sm:h-[440px] md:h-[520px]">
+    <PhotoSlot
+      src="/photos/hero.jpg"
+      alt="Table généreusement dressée chez Il Gabbiano : pâtes, pizza, salade et légumes frais"
+      teinte="inchiostro"
+      class="absolute inset-0 h-full w-full"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-inchiostro-900 via-inchiostro-900/40 to-inchiostro-900/10">
+    </div>
 
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-    <div class="max-w-2xl text-crema-50">
-      <Gabbiano class="mb-6 h-6 w-10 text-crema-200" />
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-crema-200">
-        {restaurant.cuisine} · Issy-les-Moulineaux
-      </p>
-      <h1 class="mt-4 font-serif text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">
-        {restaurant.nom}
-      </h1>
-      <p class="mt-4 text-lg text-crema-100 sm:text-xl">
+    <div class="absolute inset-x-0 bottom-0">
+      <div class="mx-auto max-w-6xl px-4 pb-6 sm:px-6 sm:pb-8">
+        <Gabbiano class="mb-4 h-6 w-10 text-crema-200" />
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-crema-200">
+          {restaurant.cuisine} · Issy-les-Moulineaux
+        </p>
+        <h1 class="mt-2 font-serif text-4xl font-bold leading-tight text-crema-50 sm:text-5xl md:text-6xl">
+          {restaurant.nom}
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-4 py-10 sm:px-6 sm:py-14">
+    <div class="mx-auto max-w-2xl text-crema-50">
+      <p class="text-lg text-crema-100 sm:text-xl">
         {restaurant.accroche} — cuisine italienne généreuse, pizzas et pâtes
         maison, petite terrasse tranquille.
       </p>
